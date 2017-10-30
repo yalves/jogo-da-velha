@@ -30,15 +30,224 @@ namespace JogoDaVelha
             Console.WriteLine("     |     |      ");
         }
 
+        //internal void JogadaDoComputador(int[] tabuleiro, bool usuarioEhX)
+        //{
+        //    int casaAJogar = DecidirCasaAJogar(tabuleiro, usuarioEhX);
+        //    var listaDeEspaçosDisponiveis = tabuleiro.FindAllIndexof(0);
+
+        //    var jogada = new Random().Next(listaDeEspaçosDisponiveis.Count());
+
+        //    Console.WriteLine("Jogada do computador:");
+        //    tabuleiro[listaDeEspaçosDisponiveis[jogada]] = usuarioEhX ? (int)CaracteresDeJogadorEnum.O : (int)CaracteresDeJogadorEnum.X;
+        //    MostrarTabuleiro(tabuleiro);
+        //}
+
         internal void JogadaDoComputador(int[] tabuleiro, bool usuarioEhX)
+        {
+            int casaAJogar = DecidirCasaAJogar(tabuleiro, usuarioEhX);
+
+            Console.WriteLine("Jogada do computador:");
+            tabuleiro[casaAJogar] = usuarioEhX ? (int)CaracteresDeJogadorEnum.O : (int)CaracteresDeJogadorEnum.X;
+            MostrarTabuleiro(tabuleiro);
+        }
+
+        private int DecidirCasaAJogar(int[] tabuleiro, bool usuarioEhX)
         {
             var listaDeEspaçosDisponiveis = tabuleiro.FindAllIndexof(0);
 
-            var jogada = new Random().Next(listaDeEspaçosDisponiveis.Count());
+            #region Possibilidades horizontais
 
-            Console.WriteLine("Jogada do computador:");
-            tabuleiro[listaDeEspaçosDisponiveis[jogada]] = usuarioEhX ? (int)CaracteresDeJogadorEnum.O : (int)CaracteresDeJogadorEnum.X;
-            MostrarTabuleiro(tabuleiro);
+            //Primeira linha
+            if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[1])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 2))
+                {
+                    return 2;
+                }
+            }
+            else if (tabuleiro[1] != 0 && tabuleiro[1] == tabuleiro[2])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 0))
+                {
+                    return 0;
+                }
+            }
+            else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[2])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 1))
+                {
+                    return 1;
+                }
+            }
+
+            //Segunda linha
+            else if (tabuleiro[3] != 0 && tabuleiro[3] == tabuleiro[4])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 5))
+                {
+                    return 5;
+                }
+            }
+            else if (tabuleiro[3] != 0 && tabuleiro[3] == tabuleiro[5])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 4))
+                {
+                    return 4;
+                }
+            }
+            else if (tabuleiro[4] != 0 && tabuleiro[4] == tabuleiro[5])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 3))
+                {
+                    return 3;
+                }
+            }
+
+            //Terceira linha
+            else if (tabuleiro[6] != 0 && tabuleiro[6] == tabuleiro[7])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 8))
+                {
+                    return 8;
+                }
+            }
+            else if (tabuleiro[6] != 0 && tabuleiro[6] == tabuleiro[8])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 7))
+                {
+                    return 7;
+                }
+            }
+            else if (tabuleiro[7] != 0 && tabuleiro[7] == tabuleiro[8])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 6))
+                {
+                    return 6;
+                }
+            }
+            #endregion
+
+            #region Possibilidades verticais
+            //Primeira linha
+            else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[3])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 6))
+                {
+                    return 6;
+                }
+            }
+            else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[6])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 3))
+                {
+                    return 3;
+                }
+            }
+            else if (tabuleiro[3] != 0 && tabuleiro[3] == tabuleiro[6])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 0))
+                {
+                    return 0;
+                }
+            }
+
+            //Segunda linha
+            else if (tabuleiro[1] != 0 && tabuleiro[1] == tabuleiro[4])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 7))
+                {
+                    return 7;
+                }
+            }
+            else if (tabuleiro[1] != 0 && tabuleiro[1] == tabuleiro[7])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 4))
+                {
+                    return 4;
+                }
+            }
+            else if (tabuleiro[4] != 0 && tabuleiro[4] == tabuleiro[7])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 1))
+                {
+                    return 1;
+                }
+            }
+
+            //Terceira linha
+            else if (tabuleiro[2] != 0 && tabuleiro[2] == tabuleiro[5])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 8))
+                {
+                    return 8;
+                }
+            }
+            else if (tabuleiro[2] != 0 && tabuleiro[2] == tabuleiro[8])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 5))
+                {
+                    return 5;
+                }
+            }
+            else if (tabuleiro[5] != 0 && tabuleiro[5] == tabuleiro[8])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 2))
+                {
+                    return 2;
+                }
+            }
+            #endregion
+
+            #region Possibilidades diagonais
+            //Primeira diagonal
+            else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[4])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 8))
+                {
+                    return 8;
+                }
+            }
+            else if (tabuleiro[4] != 0 && tabuleiro[4] == tabuleiro[8])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 0))
+                {
+                    return 0;
+                }
+            }
+            else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[8])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 4))
+                {
+                    return 4;
+                }
+            }
+
+            //Segunda diagonal
+            else if (tabuleiro[2] != 0 && tabuleiro[2] == tabuleiro[4])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 6))
+                {
+                    return 6;
+                }
+            }
+            else if (tabuleiro[4] != 0 && tabuleiro[4] == tabuleiro[6])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 2))
+                {
+                    return 2;
+                }
+            }
+            else if (tabuleiro[2] != 0 && tabuleiro[2] == tabuleiro[6])
+            {
+                if (listaDeEspaçosDisponiveis.Any(x => x == 4))
+                {
+                    return 4;
+                }
+            }
+            #endregion
+
+            var jogada = new Random().Next(listaDeEspaçosDisponiveis.Count());
+            return listaDeEspaçosDisponiveis[jogada];
         }
 
         internal bool ChegouAoFimDoJogo(int[] tabuleiro, bool usuarioEhX)
@@ -52,13 +261,13 @@ namespace JogoDaVelha
             {
                 ChecarVencedor(tabuleiro[3], usuarioEhX);
                 return true;
-            }  
+            }
             else if (tabuleiro[6] != 0 && tabuleiro[6] == tabuleiro[7] && tabuleiro[7] == tabuleiro[8])
             {
                 ChecarVencedor(tabuleiro[5], usuarioEhX);
                 return true;
             }
-     
+
             else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[3] && tabuleiro[3] == tabuleiro[6])
             {
                 ChecarVencedor(tabuleiro[0], usuarioEhX);
@@ -74,7 +283,7 @@ namespace JogoDaVelha
                 ChecarVencedor(tabuleiro[2], usuarioEhX);
                 return true;
             }
-            
+
             else if (tabuleiro[0] != 0 && tabuleiro[0] == tabuleiro[4] && tabuleiro[4] == tabuleiro[8])
             {
                 ChecarVencedor(tabuleiro[0], usuarioEhX);
@@ -114,7 +323,7 @@ namespace JogoDaVelha
 
         private void ComputadorVenceu()
         {
-            Console.WriteLine("O computador venceu! U suck boy");
+            Console.WriteLine("O computador venceu!");
         }
 
         private void UsuarioVenceu()
